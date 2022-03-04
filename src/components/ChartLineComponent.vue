@@ -1,6 +1,6 @@
 <template>
   <div>
-    <BarChart
+    <LineChart
       :chart-data="data"
       :options="options"
       css-classes="chart-container"
@@ -9,9 +9,9 @@
 </template>
 
 <script setup>
-import { computed, ref } from "vue";
+import { ref, computed } from "vue";
 
-import { BarChart } from "vue-chart-3";
+import { LineChart } from "vue-chart-3";
 
 import {
   Chart,
@@ -40,27 +40,18 @@ import {
   Tooltip,
 } from "chart.js";
 
-Chart.register(BarController, LinearScale, CategoryScale, BarElement);
+Chart.register(LineController, PointElement, LineElement);
 
-const dataValues = ref([
-  [1, 3, 5, 7, 2, 4, 6],
-  [1, 5, 2, 6, 3, 7, 4],
-]);
+const dataValues = ref([10, 15, 17, 11, 4, 8, 21]);
 
 const data = computed(() => ({
-  labels: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+  labels: ["Sun", "Mon", "Tue", "wen", "Thue", "Fri", "Sat"],
 
   datasets: [
     {
       label: "Foo",
-      data: dataValues.value[0],
-      backgroundColor: "#268bd2",
-    },
-
-    {
-      label: "Bar",
-      data: dataValues.value[1],
-      backgroundColor: "#CF2977",
+      data: dataValues.value,
+      backgroundColor: "#dc322f",
     },
   ],
 }));
@@ -68,7 +59,7 @@ const data = computed(() => ({
 const options = ref({
   plugins: {
     title: {
-      text: "Bar",
+      text: "Chart Line",
     },
   },
 });

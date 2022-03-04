@@ -1,6 +1,6 @@
 <template>
   <div>
-    <BarChart
+    <DougnutChart
       :chart-data="data"
       :options="options"
       css-classes="chart-container"
@@ -11,7 +11,7 @@
 <script setup>
 import { computed, ref } from "vue";
 
-import { BarChart } from "vue-chart-3";
+import { DoughnutChart } from "vue-chart-3";
 
 import {
   Chart,
@@ -40,27 +40,17 @@ import {
   Tooltip,
 } from "chart.js";
 
-Chart.register(BarController, LinearScale, CategoryScale, BarElement);
+Chart.register(DoughnutController, ArcElement);
 
-const dataValues = ref([
-  [1, 3, 5, 7, 2, 4, 6],
-  [1, 5, 2, 6, 3, 7, 4],
-]);
+const dataValues = ref([10, 30, 50]);
 
 const data = computed(() => ({
-  labels: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+  labels: ["Min", "Middle", "Max"],
 
   datasets: [
     {
-      label: "Foo",
-      data: dataValues.value[0],
-      backgroundColor: "#268bd2",
-    },
-
-    {
-      label: "Bar",
-      data: dataValues.value[1],
-      backgroundColor: "#CF2977",
+      data: dataValues.value,
+      backgroundColor: ["#268bd2", "#99617B", "#FF0000"],
     },
   ],
 }));
@@ -68,7 +58,7 @@ const data = computed(() => ({
 const options = ref({
   plugins: {
     title: {
-      text: "Bar",
+      text: "Dougn",
     },
   },
 });
